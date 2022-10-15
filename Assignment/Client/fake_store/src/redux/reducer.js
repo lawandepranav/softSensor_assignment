@@ -5,15 +5,14 @@ import {
   } from "./actionTypes";
   
   const initalState = {
-    counter: 0,
     list: []
   };
+  
   
   const cart = (state = initalState, action) => {
     switch (action.type) {
       case ADD_ITEM:
         return {
-          counter: state.counter + 1,
           list: [
             ...state.list,
             action.item
