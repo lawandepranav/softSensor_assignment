@@ -1,27 +1,17 @@
 import React from "react";
 import axios from "axios";
-
+import {useSelector, useDispatch} from 'react-redux'
 
 const Cart=()=>{
     const [products, setproducts] = React.useState([]);
-
-    
-      const getData=()=>{
-        axios
-        .get("https://fakestoreapi.com/products")
-        .then((res) => {
-          setproducts(res.data);
-        })
-        .catch((err) => console.log(err));
-      }
-      React.useEffect(() => {
-       getData()
-      }, []);
+    const {list } = useSelector(state => state.cart);
+    console.log(list)
+     
 
 return(
     <>
     <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"5%", width:"95%",margin:"auto"}}>
-     {products.map((item) => (
+     {list.map((item) => (
         <div className="container" style={{height:"auto",width:"300px"}}>
           <div className="container_content">
             <div className="img_div">
@@ -33,7 +23,7 @@ return(
               <p>{item.title.substring(0, 27).toUpperCase() + "..."}</p>
             </div>
             <div className="cart_but_div">
-              <button>ADD TO CART</button>
+              <button>Remove</button>
             </div>
           </div>
         </div>

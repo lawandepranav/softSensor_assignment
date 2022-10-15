@@ -1,15 +1,22 @@
 import React from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import "./home.css";
-import { CartContext } from "../context";
+import { addItem } from "../redux/action";
+
 
 const Home = () => {
-  const {handleCount}=React.useContext(CartContext)
   const [products, setproducts] = useState([]);
+  const todos = useSelector(state => state.todos);
 
-const[newdata, setNewdata]=useState([])
 
+
+  const dispatch = useDispatch();
+
+  const handleAdd =(item) => {
+      dispatch(addItem(item));
+  };
   const getData=()=>{
     axios
     .get("https://fakestoreapi.com/products")
@@ -50,7 +57,7 @@ const[newdata, setNewdata]=useState([])
               <p>Price: ₹{item.price}</p>
             </div>
             <div className="cart_but_div">
-              <button onClick={()=> handleCount(1)}>ADD TO CART</button>
+              <button onClick={()=> handleAdd(item)}>ADD TO CART</button>
             </div>
           </div>
         </div>
