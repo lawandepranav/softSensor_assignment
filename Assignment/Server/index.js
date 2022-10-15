@@ -1,12 +1,19 @@
-const express= require('express')
-const axios=require('axios')
-const app=express()
+const express=require('express')
+const app=express();
+const data=[];
+const axios=require("axios")
 
 
 
-
-
-app.get('/',function(req,res){
-    res.json('hellow')
+app.get('/', (req,res)=>{
+    const data = fetch('https://fakestoreapi.com/products')
+    .then(res=>res.json())
+    .then(json=>console.log(json))
+  
+res.json(data)
 })
-app.listen(8080,()=> console.log('server running on port 8080'))
+
+
+app.listen(3001, ()=>{
+    console.log("server started on 3001")
+})
