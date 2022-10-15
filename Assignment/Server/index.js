@@ -4,13 +4,19 @@ const data=[];
 const axios=require("axios")
 
 
+ function getData(){
 
-app.get('/', (req,res)=>{
-    const data = fetch('https://fakestoreapi.com/products')
-    .then(res=>res.json())
-    .then(json=>console.log(json))
-  
-res.json(data)
+}
+getData()
+
+app.get('/', (req,res)=>{axios
+    .get("https://fakestoreapi.com/products")
+    .then((res) => {
+        const myda= res.data
+    })
+    res.json(myda)
+    .catch((err) => console.log(err));
+
 })
 
 

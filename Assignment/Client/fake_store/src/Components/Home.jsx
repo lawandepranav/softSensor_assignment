@@ -2,9 +2,10 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./home.css";
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { CartContext } from "../context";
 
 const Home = () => {
+  const {handleCount}=React.useContext(CartContext)
   const [products, setproducts] = useState([]);
 
 const[newdata, setNewdata]=useState([])
@@ -21,21 +22,11 @@ const[newdata, setNewdata]=useState([])
    getData()
   }, []);
 
-  const fetchData= ()=>{
-  const data = fetch('https://fakestoreapi.com/products/2')
-  .then(res=>res.json())
-  .then(json=>console.log(json))
-return data
-  }
  
-  const newData=()=>{
-    const updateData=fetchData();
-    setproducts([...products, ...updateData])
-  }
 
   return (
     <div className="homepage">
-      <InfiniteScroll dataLength={products.length} next={()=>newData()} hasMore={true}>
+      
       {products.map((item) => (
         <div className="container">
           <div className="container_content">
@@ -59,12 +50,12 @@ return data
               <p>Price: ₹{item.price}</p>
             </div>
             <div className="cart_but_div">
-              <button>ADD TO CART</button>
+              <button onClick={()=> handleCount(1)}>ADD TO CART</button>
             </div>
           </div>
         </div>
       ))}
-      </InfiniteScroll>
+   
     </div>
   );
 };

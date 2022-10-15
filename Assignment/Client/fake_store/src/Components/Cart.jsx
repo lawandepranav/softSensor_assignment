@@ -3,47 +3,42 @@ import axios from "axios";
 
 
 const Cart=()=>{
-//     const items = useSelector((state) => state.cart.Carts);
-//     let ListCart = [];
-//     let TotalCart=0;
-//     console.log(TotalCart)
-  
-//     const [status, setStatus]=React.useState("")
-//     const [products, setProducts]=React.useState({})
-//     const { loading, error, data } = products;
-//     const total = useSelector((state) => state.cart.numberCart);
-//    React.useEffect(()=>{
-//     setProducts(total)
-//    })
-//    console.log(total)
-//     React.useEffect(() => {
-//     axios({
-//         method: "get",
-//         url: "http://localhost:8080/cart"
-//     }).then(res => setProducts(prev => ({
-//         ...prev,
-//         loading: false,
-//         error: false,
-//         data: res.data
-//     }))).catch(err => setProducts(prev => ({
-//         ...prev,
-//         loading: false,
-//         error: true
-//     })))
-// }, []);
+    const [products, setproducts] = React.useState([]);
 
-// const handleDelete= (itemId)=>{
-  
-//     axios.delete(`http://localhost:8080/cart/${itemId}`)
-//     .then(() => setStatus('Delete successful'));
+    
+      const getData=()=>{
+        axios
+        .get("https://fakestoreapi.com/products")
+        .then((res) => {
+          setproducts(res.data);
+        })
+        .catch((err) => console.log(err));
+      }
+      React.useEffect(() => {
+       getData()
+      }, []);
 
-// }
-
-// console.log(data)
 return(
     <>
-    <div>total</div>
-    <div>total</div>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"5%", width:"95%",margin:"auto"}}>
+     {products.map((item) => (
+        <div className="container" style={{height:"auto",width:"300px"}}>
+          <div className="container_content">
+            <div className="img_div">
+              {" "}
+              <img src={item.image} style={{height:"100px",width:"60px"}}/>
+            </div>
+            <div className="title_div">
+              {" "}
+              <p>{item.title.substring(0, 27).toUpperCase() + "..."}</p>
+            </div>
+            <div className="cart_but_div">
+              <button>ADD TO CART</button>
+            </div>
+          </div>
+        </div>
+      ))}
+      </div>
     </>
 )
 

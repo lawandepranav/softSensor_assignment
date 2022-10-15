@@ -90,7 +90,7 @@ button {
   header {
     height: 90px;
     position: sticky;
-    top: 0;
+    top: 0; 
   background: white;
     box-shadow: 0 1em 1em rgba(0, 0, 0, 0.1);
   }
